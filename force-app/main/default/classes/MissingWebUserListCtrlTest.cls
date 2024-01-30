@@ -10,8 +10,8 @@ public with sharing class MissingWebUserListCtrlTest {
     }
 
     @IsTest
-    public static void testFetchMissingUsers(){
-      List<MissingWebUserListCtrl.WebUserDetailsWrapper> WebUserDetails;
+    public static void testFetchMissingUsersSuccess(){
+      List<MissingWebUserListCtrl.WebUsersWrapper> WebUserDetails;
       StaticResourceCalloutMock mockCallout = new StaticResourceCalloutMock();
       mockCallout.setStaticResource('WebUserApiResponseMockSuccess');
 

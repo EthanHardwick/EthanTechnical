@@ -4,23 +4,39 @@
 
 public with sharing class MissingWebUserListCtrl {
 
-
-  @AuraEnabled
-  public static List<WebUserDetailsWrapper> fetchMissingUsers(){
+  @AuraEnabled(cacheable=true)
+  public static List<WebUsersWrapper> fetchMissingUsers(){
+    List<WebUsersWrapper> webUserDetails = new List<WebUsersWrapper>();
     try {
-
+      for (WebUserExternalApiService.WebUserResponseWrapper webUser : new WebUserExternalApiService().doCallout()) {
+        webUserDetails.add(new WebUsersWrapper(webUser));
+      }
     } catch (Exception error) {
-      throw new AuraHandledException(error.getMessage());
+      AuraHandledException handledException = new AuraHandledException(error.getMessage());
+      handledException.setMessage(error.getMessage());
+      throw handledException;
     }
-
-    return new List<WebUserDetailsWrapper>();
+    return webUserDetails;
   }
 
-  public class WebUserDetailsWrapper {
+  public class WebUsersWrapper {
+    @AuraEnabled
     public String id {get;set;}
+    @AuraEnabled
     public String name {get;set;}
-    public String username {get;set;}
+    @AuraEnabled
+    public String userName {get;set;}
+    @AuraEnabled
     public String email {get;set;}
+    @AuraEnabled
     public String companyName {get;set;}
+
+    public WebUsersWrapper(WebUserExternalApiService.WebUserResponseWrapper webUser){
+      this.id = webUser.id;
+      this.name = webUser.name;
+      this.userName = webUser.username;
+      this.email = webUser.email;
+      this.companyName = webUser.company.name;
+    }
   }
 }

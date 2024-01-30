@@ -1,11 +1,14 @@
 <template>
     <lightning-card title="Missing User to Import">
-      <lightning-button label="Import Missing Record" slot="actions"></lightning-button>
+      <lightning-button label="Import Missing Record" slot="actions" onclick={getMissingWebUsers}></lightning-button>
       <lightning-datatable
         key-field="id"
         data={data}
         columns={columns}
         hide-checkbox-column>
       </lightning-datatable>
+      <div lwc:if={spinnerActive}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+      </div>
     </lightning-card>
 </template>

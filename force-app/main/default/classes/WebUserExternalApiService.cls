@@ -15,6 +15,7 @@ public with sharing class WebUserExternalApiService {
 
   public class WebUserResponseWrapper {
     public String id {get;set;}
+    public String name {get;set;}
     public String username {get;set;}
     public String email {get;set;}
     public Address address {get;set;}
