@@ -8,6 +8,7 @@ public with sharing class WebUserExternalApiService {
       WebUserCalloutClient client = new WebUserCalloutClient(MISSING_WEB_USER_ENDPOINT);
       response = client.makeCallout(HTTP_METHOD_GET);
     } catch (Exception error) {
+      System.debug('caught exception');
       throw new WebUserApiException(error.getMessage());
     }
     return (List<WebUserResponseWrapper>)JSON.deserialize(response.getBody(), List<WebUserResponseWrapper>.class);

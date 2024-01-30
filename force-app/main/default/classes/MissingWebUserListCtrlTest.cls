@@ -11,7 +11,7 @@ public with sharing class MissingWebUserListCtrlTest {
 
     @IsTest
     public static void testFetchMissingUsersSuccess(){
-      List<MissingWebUserListCtrl.WebUsersWrapper> WebUserDetails;
+      List<Web_User__c> WebUserDetails;
       StaticResourceCalloutMock mockCallout = new StaticResourceCalloutMock();
       mockCallout.setStaticResource('WebUserApiResponseMockSuccess');
 
@@ -20,11 +20,53 @@ public with sharing class MissingWebUserListCtrlTest {
       WebUserDetails = MissingWebUserListCtrl.fetchMissingUsers();
       Test.stopTest();
 
-      //make test data annon
-      System.assertEquals('Leanne Graham', WebUserDetails[0].name);
-      System.assertEquals('1', WebUserDetails[0].id);
-      System.assertEquals('Bret', WebUserDetails[0].username);
-      System.assertEquals('Sincere@april.biz', WebUserDetails[0].email);
-      System.assertEquals('Romaguera-Crona', WebUserDetails[0].companyName);
+      System.assertEquals('Testing Test', WebUserDetails[0].Name);
+      System.assertEquals('1', WebUserDetails[0].Web_Site_Id__c);
+      System.assertEquals('TesterUser', WebUserDetails[0].Username__c);
+      System.assertEquals('Test@Testing.biz', WebUserDetails[0].Email__c);
+      System.assertEquals('Test Company', WebUserDetails[0].Company__c);
+    }
+
+    @IsTest
+    public static void testFetchMissingUsersFail(){
+      Web_User_Endpoint__c incorrectEndpoint = Web_User_Endpoint__c.getInstance('MISSING_WEB_USER');
+      incorrectEndpoint.Name = 'VERY_INCORRECT_ENDPOINT_NAME';
+      update incorrectEndpoint;
+
+      String exceptionMessage;
+
+      StaticResourceCalloutMock mockCallout = new StaticResourceCalloutMock();
+      mockCallout.setStaticResource('WebUserApiResponseMockSuccess');
+
+      Test.setMock(HttpCalloutMock.class, mockCallout);
+      Test.startTest();
+      try {
+        MissingWebUserListCtrl.fetchMissingUsers();
+      } catch (Exception error) {
+        exceptionMessage = error.getMessage();
+      }
+      Test.stopTest();
+
+      System.assert(exceptionMessage != null);
+    }
+
+    @IsTest
+    public static void testImportMissingWebUsersSuccess(){
+      List<Web_User__c> webUsersToInsert = new List<Web_User__c>();
+      List<Web_User__c> failedWebUsers;
+      webUsersToInsert.add(new Web_User__c(Name = 'TestSuccess', Email__c='Test@Testing.com', Company__c = 'Test company', Web_Site_Id__c = '1'));
+      webUsersToInsert.add(new Web_User__c(Name = 'TestDuplicate1', Email__c='Test@Testing.com', Company__c = 'Test company', Web_Site_Id__c = '2'));
+      webUsersToInsert.add(new Web_User__c(Name = 'TestDuplicate2', Email__c='Test@Testing.com', Company__c = 'Test Company', Web_Site_Id__c = '2'));
+
+      Test.startTest();
+      failedWebUsers = MissingWebUserListCtrl.importMissingWebUsers(webUsersToInsert);
+      Test.stopTest();
+
+      System.assertEquals(1, failedWebUsers.size());
+    }
+
+    @IsTest
+    public static void testImportMissingWebUsersFail(){
+
     }
 }

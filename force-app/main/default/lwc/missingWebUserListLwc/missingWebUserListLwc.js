@@ -34,11 +34,12 @@ export default class MissingWebUserListLwc extends LightningElement {
         this.showNotification('Accounts submitted Successfully',null, 'success');
         this.data = failedWebUserInserts;
       } else {
-        this.showNotification('Records with duplicate values for Web_Site_Id__c found',`${this.data.length - failedWebUserInserts.length} Accounts submitted Successfully.`, 'warning');
+        this.showNotification("Records with duplicate values for 'Web Site Id' found",`${this.data.length - failedWebUserInserts.length} Accounts submitted Successfully.`, 'warning');
         this.data = failedWebUserInserts;
       }
     }).catch(error =>{
       this.showNotification('An error occurred when importing users', null, 'error');
+      this.spinnerActive = false;
     });
   }
 

@@ -40,7 +40,6 @@ public with sharing class MissingWebUserListCtrl {
       handledException.setMessage(error.getMessage());
       throw handledException;
     }
-    System.debug(failedWebUserInserts);
     return failedWebUserInserts;
   }
 }
