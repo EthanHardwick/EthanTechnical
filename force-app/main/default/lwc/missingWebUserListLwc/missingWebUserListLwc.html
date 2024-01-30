@@ -1,6 +1,6 @@
 <template>
     <lightning-card title="Missing User to Import">
-      <lightning-button label="Import Missing Record" slot="actions" onclick={getMissingWebUsers}></lightning-button>
+      <lightning-button label="Import Missing Record" slot="actions" onclick={submitMissingRecords}></lightning-button>
       <lightning-datatable
         key-field="id"
         data={data}

@@ -5,38 +5,42 @@
 public with sharing class MissingWebUserListCtrl {
 
   @AuraEnabled(cacheable=true)
-  public static List<WebUsersWrapper> fetchMissingUsers(){
-    List<WebUsersWrapper> webUserDetails = new List<WebUsersWrapper>();
+  public static List<Web_User__c> fetchMissingUsers(){
+    List<Web_User__c> webUsers = new List<Web_User__c>();
     try {
       for (WebUserExternalApiService.WebUserResponseWrapper webUser : new WebUserExternalApiService().doCallout()) {
-        webUserDetails.add(new WebUsersWrapper(webUser));
+        webUsers.add(new Web_User__c(
+          Name = webUser.name,
+          Web_Site_Id__c = webUser.id,
+          Username__c = webUser.username,
+          Company__c = webUser.company.name,
+          Email__c = webUser.email
+        ));
       }
     } catch (Exception error) {
       AuraHandledException handledException = new AuraHandledException(error.getMessage());
       handledException.setMessage(error.getMessage());
       throw handledException;
     }
-    return webUserDetails;
+    return webUsers;
   }
 
-  public class WebUsersWrapper {
-    @AuraEnabled
-    public String id {get;set;}
-    @AuraEnabled
-    public String name {get;set;}
-    @AuraEnabled
-    public String userName {get;set;}
-    @AuraEnabled
-    public String email {get;set;}
-    @AuraEnabled
-    public String companyName {get;set;}
-
-    public WebUsersWrapper(WebUserExternalApiService.WebUserResponseWrapper webUser){
-      this.id = webUser.id;
-      this.name = webUser.name;
-      this.userName = webUser.username;
-      this.email = webUser.email;
-      this.companyName = webUser.company.name;
+  @AuraEnabled
+  public static List<Web_User__c> importMissingWebUsers(List<Web_User__c> webUsers){
+    List<Web_User__c> failedWebUserInserts = new List<Web_User__c>();
+    try {
+      Database.SaveResult[] saveResults = Database.insert(webUsers, false);
+      for (Web_User__c webUser : webUsers) {
+        if(webUser.Id == null){
+          failedWebUserInserts.add(webUser);
+        }
+      }
+    } catch (Exception error) {
+      AuraHandledException handledException = new AuraHandledException(error.getMessage());
+      handledException.setMessage(error.getMessage());
+      throw handledException;
     }
+    System.debug(failedWebUserInserts);
+    return failedWebUserInserts;
   }
 }
