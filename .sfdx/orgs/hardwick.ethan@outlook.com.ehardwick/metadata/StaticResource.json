@@ -1,0 +1,18 @@
+{
+  "status": 0,
+  "result": [
+    {
+      "createdById": "005QI000002IKrxYAG",
+      "createdByName": "User",
+      "createdDate": "2024-01-30T08:01:48.000Z",
+      "fileName": "staticresources/WebUserApiResponseMockSuccess.resource",
+      "fullName": "WebUserApiResponseMockSuccess",
+      "id": "081QI000000QT6PYAW",
+      "lastModifiedById": "005QI000002IKrxYAG",
+      "lastModifiedByName": "User",
+      "lastModifiedDate": "2024-01-30T08:01:48.000Z",
+      "manageableState": "unmanaged",
+      "type": "StaticResource"
+    }
+  ]
+}

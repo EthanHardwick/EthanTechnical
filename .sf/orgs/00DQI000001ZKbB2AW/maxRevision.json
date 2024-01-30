@@ -1,5 +1,5 @@
 {
-    "serverMaxRevisionCounter": 112,
+    "serverMaxRevisionCounter": 198,
     "sourceMembers": {
         "Profile__Admin": {
             "serverRevisionCounter": 33,
@@ -38,8 +38,8 @@
             "isNameObsolete": false
         },
         "ApexClass__MissingWebUserListCtrl": {
-            "serverRevisionCounter": 7,
-            "lastRetrievedFromServer": 7,
+            "serverRevisionCounter": 195,
+            "lastRetrievedFromServer": 195,
             "memberType": "ApexClass",
             "isNameObsolete": false
         },
@@ -161,6 +161,60 @@
             "serverRevisionCounter": 112,
             "lastRetrievedFromServer": 112,
             "memberType": "LightningComponentResource",
+            "isNameObsolete": false
+        },
+        "ApexClass__WebUserExternalApiService": {
+            "serverRevisionCounter": 197,
+            "lastRetrievedFromServer": 197,
+            "memberType": "ApexClass",
+            "isNameObsolete": false
+        },
+        "RemoteSiteSetting__WebUserExternalAPI": {
+            "serverRevisionCounter": 115,
+            "lastRetrievedFromServer": null,
+            "memberType": "RemoteSiteSetting",
+            "isNameObsolete": false
+        },
+        "StaticResource__WebUserApiResponseMockSuccess": {
+            "serverRevisionCounter": 116,
+            "lastRetrievedFromServer": null,
+            "memberType": "StaticResource",
+            "isNameObsolete": false
+        },
+        "ApexClass__WebUserExternalApiServiceTest": {
+            "serverRevisionCounter": 198,
+            "lastRetrievedFromServer": 198,
+            "memberType": "ApexClass",
+            "isNameObsolete": false
+        },
+        "CustomObject__Web_User_Endpoint__c": {
+            "serverRevisionCounter": 133,
+            "lastRetrievedFromServer": null,
+            "memberType": "CustomObject",
+            "isNameObsolete": false
+        },
+        "CustomField__Web_User_Endpoint__c.Endpoint__c": {
+            "serverRevisionCounter": 134,
+            "lastRetrievedFromServer": null,
+            "memberType": "CustomField",
+            "isNameObsolete": false
+        },
+        "CustomField__Web_User_Endpoint__c.Name__c": {
+            "serverRevisionCounter": 136,
+            "lastRetrievedFromServer": null,
+            "memberType": "CustomField",
+            "isNameObsolete": true
+        },
+        "ApexClass__WebUserCalloutClient": {
+            "serverRevisionCounter": 141,
+            "lastRetrievedFromServer": 141,
+            "memberType": "ApexClass",
+            "isNameObsolete": false
+        },
+        "ApexClass__MissingWebUserListCtrlTest": {
+            "serverRevisionCounter": 196,
+            "lastRetrievedFromServer": 196,
+            "memberType": "ApexClass",
             "isNameObsolete": false
         }
     }
