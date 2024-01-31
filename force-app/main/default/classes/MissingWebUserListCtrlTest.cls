@@ -64,9 +64,4 @@ public with sharing class MissingWebUserListCtrlTest {
 
       System.assertEquals(1, failedWebUsers.size());
     }
-
-    @IsTest
-    public static void testImportMissingWebUsersFail(){
-
-    }
 }
